@@ -10,10 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       emailId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          len: {
+            args: [8,16],
+            msg: "Password should be between 8 to 16 characters long"
+          }
+        }
       },
       createdAt: {
         allowNull: false,
