@@ -12,13 +12,14 @@ class UserRepository {
         }
     }
 
-    async getByEmail(userId) {
+    async getByEmail(data) {
         try {
-            const response = await User.findOne({
+            const user = await User.findOne({
                 where: {
-                    emailId : userId
+                    emailId : data.emailId
                 }
-            })
+            });
+            return user;
         } catch (error) {
             console.log("Something went wrong in repository layer");
             throw error;

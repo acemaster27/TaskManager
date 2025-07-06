@@ -20,10 +20,10 @@ class UserService {
         }
     }
 
-    async signIn(userId,plainPassword) {
+    async signIn(data) {
         try {
-            const user = await this.userRepository.getByEmail(userId);
-            const passwordMatch = this.checkPassword(plainPassword, user.password);
+            const user = await this.userRepository.getByEmail(data);
+            const passwordMatch = this.checkPassword(data.password, user.password);
             if(!passwordMatch) {
                 console.log("Incorrect password");
                 throw error;
@@ -74,9 +74,9 @@ class UserService {
         }
     }
 
-    checkPassword(plainPassword, encryptedPassword) {
+    checkPassword(userInputplainPassword, encryptedPassword) {
         try {
-            return bcrypt.compareSync(plainPassword,encryptedPassword);
+            return bcrypt.compareSync(userInputplainPassword,encryptedPassword);
         } catch (error) {
             console.log("Something went wrong in password verification");
             throw error;
