@@ -1,4 +1,4 @@
-const { TaskRepository } = require('../repository/task-repository');
+const TaskRepository = require('../repository/task-repository');
 
 class TaskService {
     
@@ -16,9 +16,9 @@ class TaskService {
         }
     }
 
-    async allTasks(data) {
+    async allTasks(identity) {
         try {
-            const response = await this.taskRepository.getById(data.userId);
+            const response = await this.taskRepository.getById(identity);
             return response;
         } catch (error) {
             console.log("Something went wrong in service layer");

@@ -3,7 +3,10 @@ const taskService = new TaskService();
 
 const create = async (req,res) => {
     try {
-        const response = await taskService.create(data);
+        const response = await taskService.create({
+            description: req.body.description,
+            userId: req.body.userId
+        });
         return res.status(201).json({
             success: true,
             err: {},
@@ -22,7 +25,9 @@ const create = async (req,res) => {
 
 const showAll = async (req,res) => {
     try {
-        const response = await taskService.allTasks(data);
+        const response = await taskService.allTasks(
+            req.body.userId
+        );
         return res.status(201).json({
             success: true,
             err: {},

@@ -12,13 +12,15 @@ class TaskRepository {
         }
     }
 
-    async getById(data) {
+    async getById(identity) {
         try {
-            const tasks = await Tasks.findAll(description,{
+            console.log(identity);
+            const tasks = await Tasks.findAll({
                 where: {
-                    id : data.userId
+                    userId : identity
                 }
-            })
+            });
+            return tasks;
         } catch (error) {
             console.log("Something went wrong in repository layer");
             throw error;
